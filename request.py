@@ -16,8 +16,9 @@ def call(api, endpoint):
 
 def print_results(raw_json):
     try:
-        colored_json = highlight(json.dumps(json.loads(raw_json), indent=2, ensure_ascii=False), lexers.JsonLexer(), formatters.TerminalFormatter())
-        print(colored_json)
+        with open(f"result.json", "w") as file:
+            file.write(str(raw_json)) 
+        print("Success, result in result.json") 
     except:
         print(raw_json)
 
