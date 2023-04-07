@@ -14,11 +14,15 @@ def call(api, endpoint):
     raw_json = response.content
     return raw_json
 
-def print_results(raw_json):
+def print_results(raw_json, endpoint):
     try:
-        with open(f"result.json", "w") as file:
-            file.write(str(raw_json)) 
-        print("Success, result in result.json") 
+        endpoint = endpoint.replace("/", "_")
+        endpoint = endpoint.replace(":", "_")
+        endpoint = endpoint.replace("?", "_")
+        endpoint = endpoint.replace(" ", "_")
+        with open(f"{endpoint}.json", "w") as file:
+            file.write(str(raw_json))
+        print(f"Success, result in {endpoint}.json") 
     except:
         print(raw_json)
 
@@ -27,7 +31,7 @@ def prompt(api):
         if sys.stdout.isatty():
             sys.stderr.write(str("\033[91m> https://api.intra.42.fr/v2/\033[0m"))
         endpoint = input()
-        print_results(call(api, endpoint))
+        print_results(call(api, endpoint), endpoint)
         prompt(api)
     else:
         endpoint = sys.argv[1]
