@@ -21,7 +21,6 @@ def print_results(raw_json):
     except:
         print(raw_json)
 
-
 def prompt(api):
     if len(sys.argv) <= 1:
         if sys.stdout.isatty():
